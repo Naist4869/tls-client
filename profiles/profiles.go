@@ -5,7 +5,7 @@ import (
 	tls "github.com/bogdanfinn/utls"
 )
 
-var DefaultClientProfile = Chrome_117
+var DefaultClientProfile = Chrome_120
 
 var MappedTLSClients = map[string]ClientProfile{
 	"chrome_103":             Chrome_103,
@@ -18,7 +18,10 @@ var MappedTLSClients = map[string]ClientProfile{
 	"chrome_110":             Chrome_110,
 	"chrome_111":             Chrome_111,
 	"chrome_112":             Chrome_112,
+	"chrome_116_PSK":         Chrome_116_PSK,
+	"chrome_116_PSK_PQ":      Chrome_116_PSK_PQ,
 	"chrome_117":             Chrome_117,
+	"chrome_120":             Chrome_120,
 	"safari_15_6_1":          Safari_15_6_1,
 	"safari_16_0":            Safari_16_0,
 	"safari_ipad_15_6":       Safari_Ipad_15_6,
@@ -32,6 +35,7 @@ var MappedTLSClients = map[string]ClientProfile{
 	"firefox_108":            Firefox_108,
 	"firefox_110":            Firefox_110,
 	"firefox_117":            Firefox_117,
+	"firefox_120":		  Firefox_120,
 	"opera_89":               Opera_89,
 	"opera_90":               Opera_90,
 	"opera_91":               Opera_91,
@@ -41,6 +45,9 @@ var MappedTLSClients = map[string]ClientProfile{
 	"nike_android_mobile":    NikeAndroidMobile,
 	"cloudscraper":           CloudflareCustom,
 	"mms_ios":                MMSIos,
+	"mms_ios_1":              MMSIos,
+	"mms_ios_2":              MMSIos2,
+	"mms_ios_3":              MMSIos3,
 	"mesh_ios":               MeshIos,
 	"mesh_ios_1":             MeshIos,
 	"mesh_ios_2":             MeshIos2,
