@@ -98,9 +98,7 @@ func (rt *roundTripper) getTransport(req *http.Request, addr string) error {
 		return fmt.Errorf("invalid URL scheme: [%v]", req.URL.Scheme)
 	}
 
-	value := req.Context().Value(ContextKeyHeader{})
-	ctx := context.WithValue(context.Background(), ContextKeyHeader{}, value)
-	_, err := rt.dialTLS(ctx, "tcp", addr)
+	_, err := rt.dialTLS(req.Context(), "tcp", addr)
 	switch err {
 	case errProtocolNegotiated:
 	case nil:
@@ -143,7 +141,7 @@ func (rt *roundTripper) dialTLS(ctx context.Context, network, addr string) (net.
 		host = rt.serverNameOverwrite
 	}
 
-	tlsConfig := &tls.Config{ClientSessionCache: rt.clientSessionCache, ServerName: host, InsecureSkipVerify: rt.insecureSkipVerify, OmitEmptyPsk: true, MinVersion: tls.VersionTLS13, MaxVersion: tls.VersionTLS13}
+	tlsConfig := &tls.Config{ClientSessionCache: rt.clientSessionCache, ServerName: host, InsecureSkipVerify: rt.insecureSkipVerify, OmitEmptyPsk: true, MinVersion: tls.VersionTLS12, MaxVersion: tls.VersionTLS13}
 	if rt.transportOptions != nil {
 		tlsConfig.RootCAs = rt.transportOptions.RootCAs
 		tlsConfig.KeyLogWriter = rt.transportOptions.KeyLogWriter
@@ -171,7 +169,7 @@ func (rt *roundTripper) dialTLS(ctx context.Context, network, addr string) (net.
 
 	switch conn.ConnectionState().NegotiatedProtocol {
 	case http2.NextProtoTLS:
-		utlsConfig := &tls.Config{ClientSessionCache: rt.clientSessionCache, InsecureSkipVerify: rt.insecureSkipVerify, OmitEmptyPsk: true, MinVersion: tls.VersionTLS13, MaxVersion: tls.VersionTLS13}
+		utlsConfig := &tls.Config{ClientSessionCache: rt.clientSessionCache, InsecureSkipVerify: rt.insecureSkipVerify, OmitEmptyPsk: true, MinVersion: tls.VersionTLS12, MaxVersion: tls.VersionTLS13}
 		if rt.transportOptions != nil {
 			utlsConfig.RootCAs = rt.transportOptions.RootCAs
 		}
